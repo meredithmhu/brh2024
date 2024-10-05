@@ -13,6 +13,11 @@ main()
 #Obtain the most general query from the user (e.g. "wedding")
 
 #Given a person's profile info, ask ChatGPT the prompt user input, and give them the user's profile info. = "what would meredith look good in for a wedding"
+"""
+How a query can be structured?
+'What should I wear for a ' + user_geninput + '? I am a + user.race + ' ' + user.gender + ' aged ' + user.age + '. My height is ' + user.height + ' and I am a size '
++ user_size + '. My skin is ' + user.skincolor + ' and my hair is ' + user.haircolor + ' and ' + user.hairlength + '.'
+"""
 #pass meredith user profile into ChatGPT 
 #then pass in "what would I look good in at a wedding"
 from openai import OpenAI
