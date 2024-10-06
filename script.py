@@ -56,6 +56,12 @@ completion = client.chat.completions.create(
 chat_output = completion.choices[0].message.content
 chat_output = chat_output.split("[")[1]
 chat_output = chat_output.split("]")[0]
+link_list = []
+
+for clothing_item in chat_output:
+    ai_reply = clothing_item.lower()
+    search_query = "https://www.zara.com/us/en/search?searchTerm=" + ai_reply
+    link_list.append(search_query)
 
 
 #take the output Chat gives, and use the output to search the database of choice (Zara? H&M? Amazon etc.) for matching items
@@ -65,5 +71,6 @@ chat_output = chat_output.split("]")[0]
 #main function for testing 
 def main():
     print(query)
-
+    for link in link_list:
+        print(link)
 main()
