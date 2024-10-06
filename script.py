@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 #imported libraries 
-
+from openai import OpenAI
 """
 script.py
 ~Proof-of-Concept for the DressMe.ai~
@@ -35,28 +35,28 @@ user_input = "wedding"
 user_geninput = input('What event or scenario would you like clothing recommendations for?: ')
 
 #Given a person's profile information and the general query, construct a detailed query to pass to the LLM.
-query = 'What should I wear for a ' + user_geninput + '? I am a ' + user.race + " " + user.gender + ' aged ' + user.age + '. My height is ' + user.height + ' and I am a size ' + user.dress_size + '. My skin is ' + user.skincolor + ' and my hair is ' + user.haircolor + ' and ' + user.hairlength + '.'
+query = 'What should I wear for a ' + user_geninput + '? I am a ' + user.race + " " + user.gender + ' aged ' + user.age + '. My height is ' + user.height + ' and I am a size ' + user.dress_size + '. My skin is ' + user.skincolor + ' and my hair is ' + user.haircolor + ' and ' + user.hairlength + '.' + \
+" Give me a list of suggested clothing items in a python list format. "
 
 
-#Import the LLM (in this case, Meta LLaMa)
-"""
-from openai import OpenAI
+# Initialize OpenAI
 client = OpenAI()
 
 completion = client.chat.completions.create(
-    model="gpt-3.5-turbo",
+    model="gpt-4o-mini",
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
         {
             "role": "user",
-            "content": "Write a haiku about recursion in programming."
+            "content": query
         }
     ]
 )
 
-print(completion.choices[0].message)
+chat_output = completion.choices[0].message.content
+chat_output = chat_output.split("[")[1]
+chat_output = chat_output.split("]")[0]
 
-"""
 
 #take the output Chat gives, and use the output to search the database of choice (Zara? H&M? Amazon etc.) for matching items
 
@@ -64,7 +64,6 @@ print(completion.choices[0].message)
 
 #main function for testing 
 def main():
-    print("Hello World")
     print(query)
 
 main()
